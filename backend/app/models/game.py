@@ -12,8 +12,8 @@ class Game(Base):
     description = Column(String, nullable=True)
     icon_url = Column(String, nullable=True)
 
-    skins = relationship(
-        "Skin",
+    products = relationship(
+        "Product",
         back_populates="game",
         cascade="all, delete-orphan",
     )

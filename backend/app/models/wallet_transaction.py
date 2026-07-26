@@ -1,56 +1,49 @@
 from datetime import datetime, timezone
 
 from sqlalchemy import (
-    BigInteger,
     Column,
-    DateTime,
-    Float,
-    ForeignKey,
     Integer,
+    Float,
     String,
+    DateTime,
+    ForeignKey,
 )
-from sqlalchemy.orm import relationship
 
 from .base import Base
 
 
-class Order(Base):
-    __tablename__ = "orders"
+class WalletTransaction(Base):
+    __tablename__ = "wallet_transactions"
 
     id = Column(Integer, primary_key=True, index=True)
 
     user_id = Column(
-        BigInteger,
+        Integer,
         ForeignKey("users.id"),
         nullable=False,
     )
 
-    product_id = Column(
-        Integer,
-        ForeignKey("products.id"),
-        nullable=False,
-    )
+    amount = Column(Float, nullable=False)
 
-    amount = Column(
-        Float,
+    transaction_type = Column(
+        String(20),
         nullable=False,
     )
+    # deposit | purchase | refund
 
     status = Column(
-        String(30),
+        String(20),
         default="pending",
     )
+    # pending | success | cancelled
+
+    payment_method = Column(
+        String(30),
+        nullable=True,
+    )
+    # p2p | click | payme
 
     created_at = Column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
-    )
-
-    user = relationship(
-        "User",
-        back_populates="orders",
-    )
-
-    product = relationship(
-        "Product",
     )

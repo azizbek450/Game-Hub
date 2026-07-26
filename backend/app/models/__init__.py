@@ -2,14 +2,16 @@ from .base import Base
 from .user import User
 from .wallet import Wallet
 from .game import Game
-from .skin import Skin
 from .order import Order
+from .product import Product
+from .wallet_transaction import WalletTransaction
 
 __all__ = [
     "Base",
     "User",
     "Wallet",
     "Game",
-    "Skin",
     "Order",
+    "Product",
+    "WalletTransaction",
 ]

@@ -10,10 +10,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database.session import engine
 from app.models import Base
+
 from app.api.v1.auth import router as auth_router
 from app.api.v1.games import router as games_router
 from app.api.v1.orders import router as orders_router
+from app.api.v1.wallet import router as wallet_router
 from app.api.v1.admin import router as admin_router
+from app.api.v1.products import router as products_router
 
 # Ma'lumotlar bazasi jadvallarini avtomatik yaratish
 Base.metadata.create_all(bind=engine)
@@ -21,7 +24,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="YAKUDZA UC & GameHub API",
     version="v2.5.0",
-    swagger_ui_parameters={"persistAuthorization": True}
+    swagger_ui_parameters={"persistAuthorization": True},
 )
 
 # Telegram Mini App va ngrok so'rovlari uchun CORS
@@ -41,20 +44,29 @@ async def add_bypass_header(request: Request, call_next):
     return response
 
 # Frontend fayllarni ulash (Mini App interfeysi uchun)
-frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../frontend"))
-if os.path.exists(frontend_path):
-    app.mount("/app", StaticFiles(directory=frontend_path, html=True), name="frontend")
+frontend_path = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../../frontend")
+)
 
-# Routerlarni ulash
+if os.path.exists(frontend_path):
+    app.mount(
+        "/app",
+        StaticFiles(directory=frontend_path, html=True),
+        name="frontend",
+    )
+
+# Routerlar
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
-app.include_router(games_router, prefix="/games", tags=["Games & Skins"])
-app.include_router(orders_router, prefix="/orders", tags=["Orders & Wallet"])
-app.include_router(admin_router, prefix="/admin", tags=["Admin Panel"])
+app.include_router(games_router, prefix="/games", tags=["Games"])
+app.include_router(products_router, prefix="/products", tags=["Products"])
+app.include_router(orders_router, prefix="/orders", tags=["Orders"])
+app.include_router(wallet_router, prefix="/wallet", tags=["Wallet"])
+app.include_router(admin_router, prefix="/admin", tags=["Admin"])
 
 @app.get("/")
 def home():
     return {
         "status": "online",
-        "project": "YAKUDZA UC API",
+        "project": "GAME HUB API",
         "message": "Barcha tizimlar muvaffaqiyatli va xatosiz ishlamoqda!"
     }

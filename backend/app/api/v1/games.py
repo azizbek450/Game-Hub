@@ -1,41 +1,53 @@
 import sys
 import os
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List
 
-# Loyihaning ildiz papkasini sys.path'ga kiritish (Import xatolarini oldini oladi)
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 from app.database.session import get_db
-from app.models import Game, Skin
-from app.schemas import GameCreate, GameResponse, SkinCreate, SkinResponse
+from app.models import Game, Product
+from app.schemas import (
+    GameCreate,
+    GameResponse,
+    ProductCreate,
+    ProductResponse,
+)
 
 router = APIRouter()
 
-# --- GAMES ---
+
+# ---------- GAMES ----------
+
 @router.post("/", response_model=GameResponse, status_code=status.HTTP_201_CREATED)
 def create_game(game_data: GameCreate, db: Session = Depends(get_db)):
-    db_game = Game(**game_data.model_dump())
-    db.add(db_game)
+    game = Game(**game_data.model_dump())
+    db.add(game)
     db.commit()
-    db.refresh(db_game)
-    return db_game
+    db.refresh(game)
+    return game
+
 
 @router.get("/", response_model=List[GameResponse])
-def get_all_games(db: Session = Depends(get_db)):
+def get_games(db: Session = Depends(get_db)):
     return db.query(Game).all()
 
 
-# --- SKINS ---
-@router.post("/skins", response_model=SkinResponse, status_code=status.HTTP_201_CREATED)
-def create_skin(skin_data: SkinCreate, db: Session = Depends(get_db)):
-    game = db.query(Game).filter(Game.id == skin_data.game_id).first()
-    if not game:
-        raise HTTPException(status_code=404, detail="O'yin topilmadi!")
+# ---------- PRODUCTS ----------
 
-    db_skin = Skin(**skin_data.model_dump())
-    db.add(db_skin)
+@router.post("/products", response_model=ProductResponse)
+def create_product(product_data: ProductCreate, db: Session = Depends(get_db)):
+    game = db.query(Game).filter(Game.id == product_data.game_id).first()
+
+    if not game:
+        raise HTTPException(404, "Game topilmadi")
+
+    product = Product(**product_data.model_dump())
+
+    db.add(product)
     db.commit()
-    db.refresh(db_skin)
-    return db_skin
+    db.refresh(product)
+
+    return product

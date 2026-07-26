@@ -81,12 +81,13 @@ class WalletTopUp(BaseModel):
 # --- ORDER SCHEMAS ---
 class OrderCreate(BaseModel):
     user_id: int
-    skin_id: int
+    product_id: int
+
 
 class OrderResponse(BaseModel):
     id: int
     user_id: int
-    skin_id: int
+    product_id: int
     amount: float
     status: str
     created_at: datetime
@@ -102,6 +103,56 @@ class UserAdminResponse(BaseModel):
     full_name: str
     role: str
     is_active: bool
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+# ---------------- PRODUCT ----------------
+
+class ProductCreate(BaseModel):
+    game_id: int
+    name: str
+    product_type: str
+    description: str | None = None
+    price: float
+    image_url: str | None = None
+    stock: int = -1
+    is_active: bool = True
+
+
+class ProductResponse(ProductCreate):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+
+class WalletTransactionResponse(BaseModel):
+    id: int
+    user_id: int
+    amount: float
+    transaction_type: str
+    status: str
+    payment_method: str | None = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class WalletTopUpRequest(BaseModel):
+    user_id: int
+    amount: float
+    payment_method: str = "p2p"
+
+
+class WalletTransactionResponse(BaseModel):
+    id: int
+    user_id: int
+    amount: float
+    transaction_type: str
+    status: str
+    payment_method: str | None = None
     created_at: datetime
 
     class Config:

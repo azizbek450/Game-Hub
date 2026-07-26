@@ -38,3 +38,9 @@ class User(Base):
         "Order",
         back_populates="user",
     )
+
+    transactions = relationship(
+        "WalletTransaction",
+        backref="user",
+        cascade="all, delete-orphan",
+    )
