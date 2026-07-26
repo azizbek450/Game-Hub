@@ -7,9 +7,9 @@ from typing import List
 # Loyihaning ildiz papkasini sys.path'ga kiritish (Import xatolarini oldini oladi)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-from backend.database.connection import get_db
-from backend.database.models import User, Order, Wallet
-from backend.app.schemas import UserAdminResponse, OrderResponse, WalletResponse, WalletTopUp
+from app.database.session import get_db
+from app.models import User, Order, Wallet
+from app.schemas import UserAdminResponse, OrderResponse, WalletResponse, WalletTopUp
 
 router = APIRouter()
 

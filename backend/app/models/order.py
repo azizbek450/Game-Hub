@@ -14,7 +14,7 @@ class Order(Base):
     user_id = Column(BigInteger, ForeignKey("users.id"), nullable=False)
     skin_id = Column(Integer, ForeignKey("skins.id"), nullable=False)
 
-    status = Column(String, default="pending")
+    status = Column(String(30), default="pending")
 
     created_at = Column(
         DateTime(timezone=True),

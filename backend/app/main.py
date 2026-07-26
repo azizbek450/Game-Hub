@@ -8,12 +8,12 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.database.connection import engine, Base
-import backend.database.models
-from backend.app.auth import router as auth_router
-from backend.app.games import router as games_router
-from backend.app.orders import router as orders_router
-from backend.app.admin import router as admin_router
+from app.database.session import engine
+from app.models import Base
+from app.api.v1.auth import router as auth_router
+from app.api.v1.games import router as games_router
+from app.api.v1.orders import router as orders_router
+from app.api.v1.admin import router as admin_router
 
 # Ma'lumotlar bazasi jadvallarini avtomatik yaratish
 Base.metadata.create_all(bind=engine)

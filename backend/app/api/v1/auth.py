@@ -11,9 +11,9 @@ from sqlalchemy.orm import Session
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 from backend.config import settings
-from backend.database.connection import get_db
-from backend.database.models import User, Wallet
-from backend.app.schemas import UserCreate, UserResponse, Token
+from app.database.session import get_db
+from app.models import User, Wallet
+from app.schemas import UserCreate, UserResponse, Token
 
 router = APIRouter()
 
