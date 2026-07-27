@@ -43,17 +43,20 @@ async def add_bypass_header(request: Request, call_next):
     response.headers["bypass-tunnel-reminder"] = "true"
     return response
 
-# Frontend fayllarni ulash (Mini App interfeysi uchun)
-frontend_path = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../../frontend")
+# Frontend fayllarni ulash (Mini App)
+frontend_path = os.path.join(
+    os.getcwd(),
+    "frontend"
 )
 
-if os.path.exists(frontend_path):
-    app.mount(
-        "/app",
-        StaticFiles(directory=frontend_path, html=True),
-        name="frontend",
-    )
+print("Frontend path:", frontend_path)
+print("Exists:", os.path.exists(frontend_path))
+
+app.mount(
+    "/app",
+    StaticFiles(directory=frontend_path, html=True),
+    name="frontend",
+)
 
 # Routerlar
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
