@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
 <title>GameHub — O'yin valyutalari va mahsulotlar do'koni</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -23,7 +23,7 @@
 	<main class="page" id="page-home" data-page="home">
 
 		<header class="topbar">
-			<button class="profile-chip" type="button" data-action="open-profile" aria-label="Profilni ochish">
+			<button class="profile-chip" type="button" data-nav="profile" aria-label="Profilni ochish">
 				<span class="avatar avatar--sm">
 					<img class="avatar__img" data-bind="user.avatar_url" alt="" hidden>
 					<span class="avatar__fallback" data-bind="user.initials">G</span>
@@ -34,7 +34,7 @@
 				</span>
 			</button>
 
-			<button class="icon-btn" type="button" data-action="open-search" aria-label="Qidiruv">
+			<button class="icon-btn" type="button" data-nav="shop" aria-label="Qidiruv">
 				<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
 					<circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/>
 					<path d="M20 20L15.8 15.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
@@ -67,7 +67,7 @@
 				<circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/>
 				<path d="M20 20L15.8 15.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
 			</svg>
-			<input class="search-bar__input" id="home-search" type="search" data-role="search-input" placeholder="O'yin yoki mahsulot qidirish" autocomplete="off">
+			<input class="search-bar__input" id="home-search" type="search" data-role="search-input" placeholder="O'yin yoki mahsulot qidirish (masalan: pubg, ff, steam)" autocomplete="off">
 		</label>
 
 		<section class="section" aria-labelledby="popular-games-heading">
@@ -77,9 +77,6 @@
 			</div>
 
 			<div class="game-rail" id="popular-games-rail" data-list="games" data-empty-text="Hozircha o'yinlar topilmadi">
-				<!-- Sample cards below are placeholders for layout/visual review only.
-				     app.js (integration phase) will clone #template-game-card into this
-				     container from GET /games/ and remove data-sample nodes. -->
 				<article class="game-card" data-sample="true">
 					<span class="game-card__icon"><img class="game-card__img" alt="" data-bind="icon_url"></span>
 					<p class="game-card__title" data-bind="title">PUBG Mobile</p>
@@ -105,7 +102,6 @@
 			</div>
 
 			<div class="product-grid" id="featured-products-grid" data-list="products" data-empty-text="Hozircha mahsulotlar yo'q">
-				<!-- Sample cards — same note as above; real data via GET /products/ -->
 				<article class="product-card" data-sample="true">
 					<span class="badge badge--type" data-type="currency"><span class="glyph glyph--currency" aria-hidden="true"></span>Valyuta</span>
 					<div class="product-card__image"><img alt="" data-bind="image_url"></div>
@@ -113,42 +109,6 @@
 					<p class="product-card__game" data-bind="game.title">PUBG Mobile</p>
 					<div class="product-card__footer">
 						<span class="price"><span class="price__value" data-bind="price">85 000</span><span class="price__unit">so'm</span></span>
-						<button class="btn btn--icon" type="button" data-action="buy" aria-label="Sotib olish">
-							<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-						</button>
-					</div>
-				</article>
-				<article class="product-card" data-sample="true">
-					<span class="badge badge--type" data-type="giftcard"><span class="glyph glyph--giftcard" aria-hidden="true"></span>Sovg'a kartasi</span>
-					<div class="product-card__image"><img alt="" data-bind="image_url"></div>
-					<h3 class="product-card__name" data-bind="name">Google Play 50,000</h3>
-					<p class="product-card__game" data-bind="game.title">Google Play</p>
-					<div class="product-card__footer">
-						<span class="price"><span class="price__value" data-bind="price">52 000</span><span class="price__unit">so'm</span></span>
-						<button class="btn btn--icon" type="button" data-action="buy" aria-label="Sotib olish">
-							<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-						</button>
-					</div>
-				</article>
-				<article class="product-card" data-sample="true">
-					<span class="badge badge--type" data-type="pass"><span class="glyph glyph--pass" aria-hidden="true"></span>Pass</span>
-					<div class="product-card__image"><img alt="" data-bind="image_url"></div>
-					<h3 class="product-card__name" data-bind="name">Elite Pass</h3>
-					<p class="product-card__game" data-bind="game.title">PUBG Mobile</p>
-					<div class="product-card__footer">
-						<span class="price"><span class="price__value" data-bind="price">78 000</span><span class="price__unit">so'm</span></span>
-						<button class="btn btn--icon" type="button" data-action="buy" aria-label="Sotib olish">
-							<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-						</button>
-					</div>
-				</article>
-				<article class="product-card" data-sample="true">
-					<span class="badge badge--type" data-type="skin"><span class="glyph glyph--skin" aria-hidden="true"></span>Skin</span>
-					<div class="product-card__image"><img alt="" data-bind="image_url"></div>
-					<h3 class="product-card__name" data-bind="name">Glacier M416</h3>
-					<p class="product-card__game" data-bind="game.title">PUBG Mobile</p>
-					<div class="product-card__footer">
-						<span class="price"><span class="price__value" data-bind="price">120 000</span><span class="price__unit">so'm</span></span>
 						<button class="btn btn--icon" type="button" data-action="buy" aria-label="Sotib olish">
 							<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 						</button>
@@ -172,7 +132,7 @@
 				<circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/>
 				<path d="M20 20L15.8 15.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
 			</svg>
-			<input class="search-bar__input" id="shop-search" type="search" data-role="search-input" placeholder="Mahsulot qidirish" autocomplete="off">
+			<input class="search-bar__input" id="shop-search" type="search" data-role="search-input" placeholder="Mahsulot yoki o'yin qidirish (masalan: pubg, pubji, ff)" autocomplete="off">
 		</label>
 
 		<div class="chip-row" id="category-filter" role="tablist" aria-label="Mahsulot turi bo'yicha filtr" data-filter-group="product_type">
@@ -186,7 +146,6 @@
 
 		<div class="chip-row chip-row--games" id="game-filter" role="tablist" aria-label="O'yin bo'yicha filtr" data-filter-group="game_id" data-list="games">
 			<button class="chip chip--active" type="button" role="tab" aria-selected="true" data-game-filter="all">Barcha o'yinlar</button>
-			<!-- Additional chips populated per game via app.js in the integration phase -->
 		</div>
 
 		<div class="product-grid" id="shop-product-grid" data-list="products" data-empty-text="Bu filtr bo'yicha mahsulot topilmadi">
@@ -197,42 +156,6 @@
 				<p class="product-card__game" data-bind="game.title">PUBG Mobile</p>
 				<div class="product-card__footer">
 					<span class="price"><span class="price__value" data-bind="price">45 000</span><span class="price__unit">so'm</span></span>
-					<button class="btn btn--icon" type="button" data-action="buy" aria-label="Sotib olish">
-						<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-					</button>
-				</div>
-			</article>
-			<article class="product-card" data-sample="true">
-				<span class="badge badge--type" data-type="currency"><span class="glyph glyph--currency" aria-hidden="true"></span>Valyuta</span>
-				<div class="product-card__image"><img alt="" data-bind="image_url"></div>
-				<h3 class="product-card__name" data-bind="name">520 Diamonds</h3>
-				<p class="product-card__game" data-bind="game.title">Free Fire</p>
-				<div class="product-card__footer">
-					<span class="price"><span class="price__value" data-bind="price">68 000</span><span class="price__unit">so'm</span></span>
-					<button class="btn btn--icon" type="button" data-action="buy" aria-label="Sotib olish">
-						<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-					</button>
-				</div>
-			</article>
-			<article class="product-card" data-sample="true">
-				<span class="badge badge--type" data-type="item"><span class="glyph glyph--item" aria-hidden="true"></span>Buyum</span>
-				<div class="product-card__image"><img alt="" data-bind="image_url"></div>
-				<h3 class="product-card__name" data-bind="name">Mystic Crate</h3>
-				<p class="product-card__game" data-bind="game.title">Mobile Legends</p>
-				<div class="product-card__footer">
-					<span class="price"><span class="price__value" data-bind="price">32 000</span><span class="price__unit">so'm</span></span>
-					<button class="btn btn--icon" type="button" data-action="buy" aria-label="Sotib olish">
-						<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-					</button>
-				</div>
-			</article>
-			<article class="product-card" data-sample="true">
-				<span class="badge badge--type" data-type="giftcard"><span class="glyph glyph--giftcard" aria-hidden="true"></span>Sovg'a kartasi</span>
-				<div class="product-card__image"><img alt="" data-bind="image_url"></div>
-				<h3 class="product-card__name" data-bind="name">Steam 100,000</h3>
-				<p class="product-card__game" data-bind="game.title">Steam</p>
-				<div class="product-card__footer">
-					<span class="price"><span class="price__value" data-bind="price">104 000</span><span class="price__unit">so'm</span></span>
 					<button class="btn btn--icon" type="button" data-action="buy" aria-label="Sotib olish">
 						<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 					</button>
@@ -266,6 +189,53 @@
 
 		<section class="section">
 			<div class="section__head">
+				<h2 class="section__title">To'lov usuli</h2>
+			</div>
+
+			<div class="payment-methods-grid" id="payment-methods-grid">
+				<button class="payment-method-card glass payment-method-card--active" type="button" data-payment="p2p">
+					<span class="payment-method-card__icon">🤝</span>
+					<span class="payment-method-card__info">
+						<span class="payment-method-card__title">P2P</span>
+						<span class="payment-method-card__desc">Karta raqamiga o'tkazma</span>
+					</span>
+				</button>
+				<button class="payment-method-card glass" type="button" data-payment="card">
+					<span class="payment-method-card__icon">💳</span>
+					<span class="payment-method-card__info">
+						<span class="payment-method-card__title">Bank Card</span>
+						<span class="payment-method-card__desc">Uzcard / Humo</span>
+					</span>
+				</button>
+				<button class="payment-method-card glass" type="button" data-payment="paynet">
+					<span class="payment-method-card__icon">🏧</span>
+					<span class="payment-method-card__info">
+						<span class="payment-method-card__title">Paynet</span>
+						<span class="payment-method-card__desc">Tezkor to'lov</span>
+					</span>
+				</button>
+			</div>
+		</section>
+
+		<section class="section" id="p2p-details-section">
+			<div class="p2p-card glass">
+				<div class="p2p-card__row">
+					<span class="p2p-card__label">Karta raqami</span>
+					<button class="p2p-copy-btn" type="button" id="p2p-copy-btn" aria-label="Karta raqamini nusxalash">
+						<svg viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="1.8"/></svg>
+						<span>Nusxalash</span>
+					</button>
+				</div>
+				<div class="p2p-card__number" id="p2p-card-number">9860600410297854</div>
+				<div class="p2p-card__holder-row" style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+					<span class="p2p-card__label">Karta egasi:</span>
+					<span class="p2p-card__holder" id="p2p-card-holder" style="font-size: 13px; font-weight: 600;">Oralov Ozodbek</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section__head">
 				<h2 class="section__title">Hamyonni to'ldirish</h2>
 			</div>
 
@@ -281,8 +251,19 @@
 				<input class="search-bar__input" id="topup-custom-amount" type="number" inputmode="numeric" min="0" step="1000" placeholder="Boshqa summa kiriting" data-role="topup-input">
 			</label>
 
-			<button class="btn btn--gold btn--full" type="button" data-action="submit-topup">Hamyonni to'ldirish</button>
-			<p class="hint-text">To'lov tasdiqlangandan so'ng balansingiz yangilanadi.</p>
+			<div class="warning-card glass" id="wallet-warning-card" style="padding: 14px; border-radius: var(--radius-md); display: flex; gap: 12px; align-items: flex-start; background: rgba(244, 183, 64, 0.08); border: 1px solid rgba(244, 183, 64, 0.25); margin-top: 14px;">
+				<div class="warning-card__icon" style="font-size: 20px;">⚠️</div>
+				<div class="warning-card__content" style="display: flex; flex-direction: column; gap: 2px;">
+					<h4 class="warning-card__title" style="font-size: 13px; font-weight: 700; color: var(--accent-gold);">DIQQAT</h4>
+					<p class="warning-card__text" style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">Faqat tanlangan summani yuboring. To'lov qilgandan keyin "To'lov qildim" tugmasini bosing.</p>
+				</div>
+			</div>
+
+			<button class="btn btn--gold btn--full" type="button" data-action="submit-topup" id="submit-topup-btn" style="margin-top: 14px;">
+				<span class="btn-spinner" id="topup-spinner" hidden></span>
+				<span class="btn-text">To'lov qildim</span>
+			</button>
+			<p class="hint-text" style="text-align: center; font-size: 11.5px; color: var(--text-tertiary); margin-top: 8px;">To'lov tasdiqlangandan so'ng balansingiz avtomatik yangilanadi.</p>
 		</section>
 
 		<section class="section">
@@ -302,19 +283,38 @@
 					<span class="tx-row__amount tx-row__amount--positive" data-bind="amount">+50 000</span>
 					<span class="badge badge--status" data-status="success" data-bind="status">Muvaffaqiyatli</span>
 				</li>
-				<li class="tx-row" data-sample="true">
-					<span class="tx-row__icon tx-row__icon--deposit" aria-hidden="true">
-						<svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</span>
-					<span class="tx-row__info">
-						<span class="tx-row__title" data-bind="transaction_type">Hamyon to'ldirish</span>
-						<span class="tx-row__date" data-bind="created_at">24.07.2026</span>
-					</span>
-					<span class="tx-row__amount tx-row__amount--positive" data-bind="amount">+25 000</span>
-					<span class="badge badge--status" data-status="pending" data-bind="status">Kutilmoqda</span>
-				</li>
 			</ul>
 		</section>
+	</main>
+
+	<!-- ======================================================= -->
+	<!-- CART                                                     -->
+	<!-- ======================================================= -->
+	<main class="page" id="page-cart" data-page="cart" hidden>
+
+		<header class="page-header">
+			<h1 class="page-header__title">Savatcha</h1>
+		</header>
+
+		<section class="section">
+			<div id="cart-items" data-empty-text="Savatchangiz bo'sh"></div>
+		</section>
+
+		<section class="section">
+			<div class="cart-summary-card glass">
+				<div class="cart-summary-row">
+					<span class="cart-summary-label">Jami summa:</span>
+					<strong class="cart-summary-total" id="cart-total">0 so'm</strong>
+				</div>
+				<button class="btn btn--gold btn--full" id="checkout-btn" type="button">
+					Buyurtma berish
+				</button>
+				<button class="btn btn--ghost btn--full cart-clear-btn" id="clear-cart-btn" type="button" style="margin-top: 8px;">
+					Savatchani tozalash
+				</button>
+			</div>
+		</section>
+
 	</main>
 
 	<!-- ======================================================= -->
@@ -333,32 +333,7 @@
 			<button class="chip" type="button" role="tab" aria-selected="false" data-status-filter="failed">Bekor qilindi</button>
 		</div>
 
-		<ul class="order-list" id="orders-list" data-list="orders" data-empty-text="Hali buyurtmalar yo'q">
-			<li class="order-row" data-sample="true">
-				<div class="order-row__image"><img alt="" data-bind="product.image_url"></div>
-				<div class="order-row__info">
-					<span class="order-row__name" data-bind="product.name">660 UC</span>
-					<span class="order-row__game" data-bind="product.game.title">PUBG Mobile</span>
-					<span class="order-row__date" data-bind="created_at">25.07.2026, 14:32</span>
-				</div>
-				<div class="order-row__meta">
-					<span class="price"><span class="price__value" data-bind="amount">85 000</span><span class="price__unit">so'm</span></span>
-					<span class="badge badge--status" data-status="success" data-bind="status">Bajarildi</span>
-				</div>
-			</li>
-			<li class="order-row" data-sample="true">
-				<div class="order-row__image"><img alt="" data-bind="product.image_url"></div>
-				<div class="order-row__info">
-					<span class="order-row__name" data-bind="product.name">Elite Pass</span>
-					<span class="order-row__game" data-bind="product.game.title">PUBG Mobile</span>
-					<span class="order-row__date" data-bind="created_at">22.07.2026, 09:10</span>
-				</div>
-				<div class="order-row__meta">
-					<span class="price"><span class="price__value" data-bind="amount">78 000</span><span class="price__unit">so'm</span></span>
-					<span class="badge badge--status" data-status="pending" data-bind="status">Kutilmoqda</span>
-				</div>
-			</li>
-		</ul>
+		<ul class="order-list" id="orders-list" data-list="orders" data-empty-text="Buyurtmalar mavjud emas"></ul>
 	</main>
 
 	<!-- ======================================================= -->
@@ -371,44 +346,145 @@
 		</header>
 
 		<section class="profile-hero glass">
-			<span class="avatar avatar--lg">
-				<img class="avatar__img" data-bind="user.avatar_url" alt="" hidden>
-				<span class="avatar__fallback" data-bind="user.initials">G</span>
-			</span>
-			<h2 class="profile-hero__name" data-bind="user.full_name">Mehmon</h2>
-			<p class="profile-hero__username" data-bind="user.username">@mehmon</p>
-			<span class="badge badge--role" data-bind="user.role" hidden>user</span>
+			<div class="profile-avatar-wrapper" id="profile-avatar-btn" role="button" aria-label="Avatar actions">
+				<span class="avatar avatar--lg">
+					<img class="avatar__img" data-bind="user.avatar_url" id="profile-avatar-img" alt="" hidden>
+					<span class="avatar__fallback" data-bind="user.initials" id="profile-avatar-fallback">G</span>
+				</span>
+				<div class="profile-avatar-badge">📸</div>
+			</div>
+			
+			<div class="profile-hero-info">
+				<div class="profile-name-row">
+					<h2 class="profile-hero__name" data-bind="user.full_name">Mehmon</h2>
+					<span class="badge badge--tier" id="profile-tier-badge">Gold</span>
+				</div>
+				<p class="profile-hero__username" data-bind="user.username">@mehmon</p>
+				
+				<div class="profile-id-row" id="profile-copy-id-btn" role="button" title="Telegram ID ni nusxalash">
+					<span class="profile-id-label">ID:</span>
+					<span class="profile-id-value" id="profile-telegram-id">783920184</span>
+					<svg class="profile-id-copy-icon" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="1.8"/></svg>
+				</div>
+			</div>
+
+			<div class="profile-status-box glass">
+				<span class="profile-status-dot"></span>
+				<span class="profile-status-text" id="profile-status-text">O'yinlarga tayyorman! 🎮</span>
+			</div>
+
+			<div class="profile-meta-grid">
+				<div class="profile-meta-item">
+					<span class="profile-meta-label">Ro'yxatdan o'tgan</span>
+					<span class="profile-meta-val" id="profile-reg-date">15.01.2026</span>
+				</div>
+				<div class="profile-meta-item">
+					<span class="profile-meta-label">Jami xaridlar</span>
+					<span class="profile-meta-val" id="profile-total-spent">1 420 000 so'm</span>
+				</div>
+			</div>
 		</section>
 
-		<nav class="menu-list" aria-label="Profil menyusi">
-			<button class="menu-item" type="button" data-nav="wallet">
-				<span class="menu-item__icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.8"/></svg></span>
-				<span class="menu-item__label">Hamyonim</span>
-				<span class="menu-item__chevron" aria-hidden="true">›</span>
+		<section class="profile-stats-grid">
+			<div class="profile-stat-card glass" data-nav="wallet" role="button">
+				<div class="profile-stat-icon" style="color: var(--accent-gold);">💰</div>
+				<div class="profile-stat-content">
+					<span class="profile-stat-label">Balans</span>
+					<span class="profile-stat-value" id="stat-balance">125 000</span>
+				</div>
+			</div>
+			<div class="profile-stat-card glass" data-nav="orders" role="button">
+				<div class="profile-stat-icon" style="color: var(--accent-indigo);">📦</div>
+				<div class="profile-stat-content">
+					<span class="profile-stat-label">Buyurtmalar</span>
+					<span class="profile-stat-value" id="stat-orders-count">14</span>
+				</div>
+			</div>
+			<div class="profile-stat-card glass" data-profile-menu="bonuses" role="button">
+				<div class="profile-stat-icon" style="color: var(--accent-mint);">🎁</div>
+				<div class="profile-stat-content">
+					<span class="profile-stat-label">Bonuslar</span>
+					<span class="profile-stat-value" id="stat-bonuses">5 400</span>
+				</div>
+			</div>
+			<div class="profile-stat-card glass" data-profile-menu="cashback" role="button">
+				<div class="profile-stat-icon" style="color: var(--type-giftcard);">✨</div>
+				<div class="profile-stat-content">
+					<span class="profile-stat-label">Cashback</span>
+					<span class="profile-stat-value" id="stat-cashback">12 500</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="profile-section-card glass">
+			<h3 class="profile-card-title">Sozlamalar</h3>
+			<div class="settings-list">
+				<div class="setting-row">
+					<span class="setting-label">Dark Mode</span>
+					<label class="switch">
+						<input type="checkbox" id="setting-darkmode" checked>
+						<span class="slider"></span>
+					</label>
+				</div>
+				<div class="setting-row">
+					<span class="setting-label">Bildirishnomalar</span>
+					<label class="switch">
+						<input type="checkbox" id="setting-notifications" checked>
+						<span class="slider"></span>
+					</label>
+				</div>
+				<div class="setting-row">
+					<span class="setting-label">Ovoz effektlari</span>
+					<label class="switch">
+						<input type="checkbox" id="setting-sound" checked>
+						<span class="slider"></span>
+					</label>
+				</div>
+				<div class="setting-row">
+					<span class="setting-label">Tilni o'zgartirish</span>
+					<button class="setting-select-btn" id="setting-lang-btn" type="button">O'zbekcha ▾</button>
+				</div>
+			</div>
+		</section>
+
+		<nav class="menu-list" aria-label="Profil menyusi" style="display: flex; flex-direction: column; gap: 8px;">
+			<button class="menu-item glass" type="button" data-nav="wallet" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-soft); background: var(--surface);">
+				<span class="menu-item__icon" style="font-size: 18px;"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="3" y="6" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.8"/></svg></span>
+				<span class="menu-item__label" style="flex: 1; text-align: left; font-weight: 500;">Hamyon</span>
+				<span class="menu-item__chevron" aria-hidden="true">&rsaquo;</span>
 			</button>
-			<button class="menu-item" type="button" data-nav="orders">
-				<span class="menu-item__icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M6 7l1.5 12h9L18 7M9.5 11v4M14.5 11v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-				<span class="menu-item__label">Buyurtmalarim</span>
-				<span class="menu-item__chevron" aria-hidden="true">›</span>
+			<button class="menu-item glass" type="button" data-nav="orders" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-soft); background: var(--surface);">
+				<span class="menu-item__icon" style="font-size: 18px;"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M4 7h16M6 7l1.5 12h9L18 7M9.5 11v4M14.5 11v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+				<span class="menu-item__label" style="flex: 1; text-align: left; font-weight: 500;">Buyurtmalarim</span>
+				<span class="menu-item__chevron" aria-hidden="true">&rsaquo;</span>
 			</button>
-			<button class="menu-item" type="button" data-action="language">
-				<span class="menu-item__icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.4 3.3 8.5s-1.1 6.1-3.3 8.5c-2.2-2.4-3.3-5.4-3.3-8.5S9.8 5.9 12 3.5Z" stroke="currentColor" stroke-width="1.8"/></svg></span>
-				<span class="menu-item__label">Til</span>
-				<span class="menu-item__value" data-bind="user.language">O'zbek</span>
-				<span class="menu-item__chevron" aria-hidden="true">›</span>
+			<button class="menu-item glass" type="button" data-profile-menu="bonuses" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-soft); background: var(--surface);">
+				<span class="menu-item__icon" style="font-size: 18px;">🎁</span>
+				<span class="menu-item__label" style="flex: 1; text-align: left; font-weight: 500;">Bonuslar</span>
+				<span class="menu-item__chevron" aria-hidden="true">&rsaquo;</span>
 			</button>
-			<button class="menu-item" type="button" data-action="support">
-				<span class="menu-item__icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M9.2 9.6a2.8 2.8 0 1 1 4.2 2.4c-.8.5-1.4 1-1.4 2.1M12 17h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-				<span class="menu-item__label">Yordam xizmati</span>
-				<span class="menu-item__chevron" aria-hidden="true">›</span>
+			<button class="menu-item glass" type="button" data-profile-menu="cashback" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-soft); background: var(--surface);">
+				<span class="menu-item__icon" style="font-size: 18px;">✨</span>
+				<span class="menu-item__label" style="flex: 1; text-align: left; font-weight: 500;">Cashback</span>
+				<span class="menu-item__chevron" aria-hidden="true">&rsaquo;</span>
 			</button>
-			<button class="menu-item menu-item--danger" type="button" data-action="logout">
-				<span class="menu-item__icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3M16 16l4-4-4-4M20 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-				<span class="menu-item__label">Chiqish</span>
+			<button class="menu-item glass" type="button" data-profile-menu="support" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-soft); background: var(--surface);">
+				<span class="menu-item__icon" style="font-size: 18px;"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M9.2 9.6a2.8 2.8 0 1 1 4.2 2.4c-.8.5-1.4 1-1.4 2.1M12 17h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+				<span class="menu-item__label" style="flex: 1; text-align: left; font-weight: 500;">Yordam markazi (Support)</span>
+				<span class="menu-item__chevron" aria-hidden="true">&rsaquo;</span>
+			</button>
+			<button class="menu-item glass" type="button" data-profile-menu="language" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-soft); background: var(--surface);">
+				<span class="menu-item__icon" style="font-size: 18px;"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.4 3.3 8.5s-1.1 6.1-3.3 8.5c-2.2-2.4-3.3-5.4-3.3-8.5S9.8 5.9 12 3.5Z" stroke="currentColor" stroke-width="1.8"/></svg></span>
+				<span class="menu-item__label" style="flex: 1; text-align: left; font-weight: 500;">Tilni o'zgartirish (Language)</span>
+				<span class="menu-item__chevron" aria-hidden="true">&rsaquo;</span>
+			</button>
+			<button class="menu-item glass menu-item--danger" type="button" data-profile-menu="logout" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid rgba(255, 92, 114, 0.3); background: rgba(255, 92, 114, 0.08); color: var(--accent-coral);">
+				<span class="menu-item__icon" style="font-size: 18px;"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3M16 16l4-4-4-4M20 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				<span class="menu-item__label" style="flex: 1; text-align: left; font-weight: 500;">Chiqish</span>
 			</button>
 		</nav>
 
-		<p class="app-version">GameHub &middot; v2.5.0</p>
+		<p class="app-version" style="text-align: center; font-size: 12px; color: var(--text-tertiary); margin-top: 10px;">GameHub &middot; v2.5.0 Production Ready</p>
 	</main>
 
 	<!-- ======================================================= -->
@@ -422,6 +498,15 @@
 		<button class="bottom-nav__item" type="button" data-nav="shop">
 			<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16l-1.4 10.3a2 2 0 0 1-2 1.7H7.4a2 2 0 0 1-2-1.7L4 8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 8a4 4 0 1 1 8 0" stroke="currentColor" stroke-width="1.8"/></svg>
 			<span>Do'kon</span>
+		</button>
+		<button class="bottom-nav__item" type="button" data-nav="cart">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<circle cx="9" cy="20" r="1"></circle>
+				<circle cx="18" cy="20" r="1"></circle>
+				<path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H7"></path>
+			</svg>
+			<span>Savatcha</span>
+			<span id="cart-badge" class="badge" hidden>0</span>
 		</button>
 		<button class="bottom-nav__item" type="button" data-nav="wallet">
 			<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.8"/><circle cx="16.5" cy="14" r="1.2" fill="currentColor"/></svg>
@@ -438,10 +523,6 @@
 	</nav>
 
 </div>
-
-<!-- ============================================================= -->
-<!-- TEMPLATES — cloned by app.js in the backend-integration phase -->
-<!-- ============================================================= -->
 
 <template id="template-game-card">
 	<article class="game-card">
@@ -461,51 +542,14 @@
 		<p class="product-card__game" data-bind="game.title"></p>
 		<div class="product-card__footer">
 			<span class="price"><span class="price__value" data-bind="price"></span><span class="price__unit">so'm</span></span>
-			<button class="btn btn--icon" type="button" data-action="buy" aria-label="Sotib olish">
+			<button class="btn btn--icon ripple-btn" type="button" data-action="buy" aria-label="Sotib olish">
 				<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 			</button>
 		</div>
 	</article>
 </template>
 
-<template id="template-tx-row">
-	<li class="tx-row">
-		<span class="tx-row__icon" aria-hidden="true">
-			<svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-		</span>
-		<span class="tx-row__info">
-			<span class="tx-row__title" data-bind="transaction_type"></span>
-			<span class="tx-row__date" data-bind="created_at"></span>
-		</span>
-		<span class="tx-row__amount" data-bind="amount"></span>
-		<span class="badge badge--status" data-status="" data-bind="status"></span>
-	</li>
-</template>
-
-<template id="template-order-row">
-	<li class="order-row">
-		<div class="order-row__image"><img alt="" data-bind="product.image_url"></div>
-		<div class="order-row__info">
-			<span class="order-row__name" data-bind="product.name"></span>
-			<span class="order-row__game" data-bind="product.game.title"></span>
-			<span class="order-row__date" data-bind="created_at"></span>
-		</div>
-		<div class="order-row__meta">
-			<span class="price"><span class="price__value" data-bind="amount"></span><span class="price__unit">so'm</span></span>
-			<span class="badge badge--status" data-status="" data-bind="status"></span>
-		</div>
-	</li>
-</template>
-
-<!--
-	app.js is intentionally not included yet — added in the backend-integration
-	phase. It will be responsible for:
-	  - Tab switching between .page sections (toggling [hidden])
-	  - Fetching /games/, /products/, wallet + order data and populating the
-	    containers above via the <template> elements
-	  - Wiring [data-action] buttons (buy, topup, logout, etc.)
--->
-	  <script src="app.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
